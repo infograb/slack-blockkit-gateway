@@ -102,7 +102,7 @@ def check_element(el, where, in_actions=False):
         pass
     elif t in ("plain_text_input", "rich_text_input", "email_text_input", "url_text_input", "number_input", "file_input"):
         if t == "rich_text_input": warn(f"{where}: rich_text_input은 Messages 불가(Modals/Home)")
-        if t in ("email_text_input", "url_text_input", "number_input", "file_input"):
+        if t in ("number_input", "file_input"):
             warn(f"{where}: {t}는 Modals 전용 — 메시지 게시 시 실패 가능")
     elif t == "url":
         pass

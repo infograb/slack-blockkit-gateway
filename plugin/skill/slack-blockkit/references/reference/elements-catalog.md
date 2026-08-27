@@ -39,7 +39,8 @@
 |---|---|---|---|
 | `plain_text_input` | M V H | multiline, min/max_length ≤3000, dispatch_action_config | ✅ T12 (메시지 내) |
 | `rich_text_input` | V H (**M 제외**) | action_id 필수, min/max_lines 1~100(기본 8) | 미실측 |
-| `email_text_input` / `url_text_input` / `number_input` | **V만** | number는 is_decimal_allowed 필수, min/max는 문자열 | 미실측 |
+| `email_text_input` / `url_text_input` | M V | message input 블록에서도 xoxb 게시·저장 확인 | ✅ T47 |
+| `number_input` | **V만** | is_decimal_allowed 필수, min/max는 문자열 | 미실측 |
 | `file_input` | **V만** | max_files 10, 파일당 100MB, files:read 필요, dispatch_action 병용 불가 | 미실측 |
 
 ## 콘텐츠 엘리먼트

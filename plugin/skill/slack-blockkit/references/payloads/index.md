@@ -1,7 +1,7 @@
 # Payloads — 복사용 페이로드 색인
 
 > 사용법: `channel`을 채우고 `chat.postMessage`에 그대로 전달. 모든 파일은 JSON 유효성 검사 완료.
-> `text`(폴 스트링)는 알림/검색용으로 항상 유지할 것. 검증 환경: 2026-08-24, InfoGrab, 유저 토큰.
+> `text`(폴 스트링)는 알림/검색용으로 항상 유지할 것. 검증 환경: 2026-08-24 유저 토큰 + 2026-08-27 봇 토큰.
 
 | 파일 | 패턴 | 대응 케이스 | 검증 |
 |---|---|---|---|
@@ -16,6 +16,7 @@
 | `data-viz-pie.json` | data_visualization 파이 | 07 차트 | [실측 ✅ T31] |
 | `markdown-llm-output.json` | markdown 블록 (CommonMark) | 04/07 전반 | [실측 ✅ T37] |
 | `snippet-upload.js` | filesUploadV2 스니펫 | 03 산출물 | [실측 ✅ T25] |
+| `rich-controls-message.json` | 버튼·콤보박스·날짜/시간·복수선택·대상선택·입력·표·차트 종합 | 02/07/09 | [xoxb 실측 ✅ T43~T49 정확 조합] |
 
 ## 주의
 

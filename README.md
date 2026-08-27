@@ -199,10 +199,13 @@ hermes gateway restart
 | 기존 세션만 적용 안 됨 | Slack에서 `/new` 또는 `/reset` |
 | 표가 monospace로 보임 | Slack table 제한 또는 renderer fallback 확인 |
 | blocks가 거부됨 | Hermes 로그의 block rejection과 평문 재시도 확인 |
+| Task Card가 평문으로 폴백 | `cannot_provide_both_markdown_text_and_chunks` 확인 후 `docs/hermes-core-compatibility.md`의 core patch 적용 |
+
+리치 컨트롤 종합 payload는 `plugin/skill/slack-blockkit/references/payloads/rich-controls-message.json`, xoxb 검증 결과는 `verified-matrix.md` T43~T49, 성능 기준은 `performance.md`에 있다.
 
 ## 공개 패키지 정책
 
-공개 archive에는 개인 DM·workspace 식별 정보가 들어 있는 렌더 스크린샷을 포함하지 않는다. T01~T42의 텍스트 검증 결과와 API 오류 원문은 `skill/slack-blockkit/references/verified-matrix.md`에 유지한다.
+공개 archive에는 개인 DM·workspace 식별 정보가 들어 있는 렌더 스크린샷을 포함하지 않는다. T01~T49의 텍스트 검증 결과와 API 오류 원문은 `skill/slack-blockkit/references/verified-matrix.md`에 유지한다.
 
 ## 라이선스
 

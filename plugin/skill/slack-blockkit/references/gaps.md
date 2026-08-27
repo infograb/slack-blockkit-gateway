@@ -7,7 +7,7 @@
 
 | # | 항목 | 왜 못 했나 | 검증 방법 |
 |---|---|---|---|
-| A1 | **봇 토큰(xoxb)에서의 전 블록 동작** — 특히 multi-select in actions가 봇 토큰에서도 거부되는지 | 봇 토큰/앱 부재 | Slack 앱 생성 후 T08/T08c 재시험 |
+| A1 | **봇 토큰(xoxb)의 나머지 블록 동작** — controls/date/input/table/data_visualization/plan은 T43~T49로 승격, carousel/card/task_card 직접 post가 잔여 | 일부 신형 블록 미시험 | 잔여 블록을 동일 xoxb 환경에서 분리 시험 |
 | A2 | **ephemeral / 스트리밍(chat.*Stream) 실제 동작** | 유저 토큰 `not_allowed_token_type` 확인만 | 봇 토큰 + interactivity 앱 |
 | A3 | **버튼·셀렉트·피드백 클릭 페이로드(block_actions) 수신** | interactivity 백엔드 부재 | Socket Mode 앱으로 클릭 시험 |
 | A4 | **confirm 다이얼로그 실제 표시** | 클릭 플로우 필요 | A3과 함께 |
@@ -17,7 +17,7 @@
 | A8 | **data_visualization bar/line/area 스키마** | pie만 실측 | 동일 방식으로 시험 |
 | A9 | **table 블록의 raw_number 셀** (data_table과 달리 되는지) | 미시험 | T14 변형 시험 |
 | A10 | **markdown 블록에서 멘션(<@U>, <!here>)·날짜 토큰 동작** | 미시험 | T37 변형 |
-| A11 | **Hermes `slack-blockkit-gateway`의 실제 xoxb Gateway 게시·렌더** | 로컬 plugin/renderer 계약만 검증, 라이브 Slack 게시 미실시 | 테스트 워크스페이스에서 rich_blocks 응답의 `ok:true`, blocks, fallback text 확인 |
+| A11 | **Hermes `slack-blockkit-gateway`의 Task Card 재시작 후 스트리밍** — 일반 rich_blocks xoxb 게시·저장은 완료 | long-lived Gateway가 core 수정 전 코드일 수 있음 | 외부 Gateway 재시작 후 appendStream 오류·fallback 로그 재검사 |
 
 ## B. 문서만 있고 실측·사례가 약한 영역
 
