@@ -1,7 +1,9 @@
-# 실측 검증 매트릭스 (T01~T42)
+# 실측 검증 매트릭스 (T01~T49)
 
 > 환경: 2026-08-24, InfoGrab 테스트 워크스페이스(workspace ID는 공개 패키지에서 제거), **유저 토큰(xoxc)**, `chat.postMessage`를 본인 DM 스레드에 게시.
 > "수락" = API ok:true, "렌더" = 데스크톱 클라이언트 시각 확인, "저장" = `conversations.replies` 조회 확인.
+
+> 추가 환경: 2026-08-27, 동일 워크스페이스의 **봇 토큰(xoxb)**, 테스트 스레드에 게시. 공개 패키지에는 channel/ts를 기록하지 않는다. T43~T49는 API `ok:true`와 `conversations.replies`의 저장 block type을 확인했다.
 
 ## 표시 블록
 
@@ -73,6 +75,18 @@
 | T29 | GitHub 링크 + unfurl_links:true | ✅ 게시 / ⚠️ **언펄 없음**(GitHub 앱 미설치) |
 | T39 | chat.startStream (유저 토큰) | ❌ `not_allowed_token_type` — 봇 토큰 필요 |
 
+## 봇 토큰(xoxb) 리치 컨트롤·데이터 블록
+
+| ID | 시험 내용 | 결과 |
+|---|---|---|
+| T43 | button + static_select + overflow in actions | ✅ 수락·저장 (`header`, `actions`) |
+| T44 | datepicker + timepicker + datetimepicker in actions | ✅ 수락·저장 (`header`, `actions`) |
+| T45 | multi_static_select section accessory + radio_buttons + checkboxes | ✅ 수락·저장 (`header`, `section`, `actions`) |
+| T46 | users_select + conversations_select + channels_select | ✅ 수락·저장 (`header`, `actions`) |
+| T47 | message input: plain_text_input + email_text_input + url_text_input | ✅ 수락·저장 (`header`, `input` ×3) |
+| T48 | native table | ✅ 수락·저장 (`header`, `table`) |
+| T49 | data_visualization pie + plan 및 T43~T49 종합 11-block payload | ✅ 수락·저장. 종합 payload도 정확히 11개 block type으로 readback |
+
 ## 핵심 교훈 (에이전트용 요약)
 
 1. **`invalid_blocks` = 전체 미게시.** 부분 성공 없음. API 응답만 믿을 것(유령 렌더 존재).
@@ -85,6 +99,8 @@
 8. **data_table 셀은 raw_text로.** raw_number는 유저 토큰에서 거부됨(문서와 충돌).
 9. **외부 이미지 URL은 깨질 수 있다.** 파일 업로드가 안전.
 10. **폴 스트링 text는 항상.** 알림/검색/저장 실패 분석의 기준.
+11. **xoxb에서는 multi-select를 section accessory로 사용하면 안전하다.** 메시지 input의 email/url도 게시·저장됐다.
+12. **렌더 성공과 동작 성공을 구분한다.** T43~T49는 게시·저장 검증이며 임의 action_id 클릭 처리는 별도 interactivity 백엔드가 필요하다.
 
 ## 렌더 증거 공개 정책
 

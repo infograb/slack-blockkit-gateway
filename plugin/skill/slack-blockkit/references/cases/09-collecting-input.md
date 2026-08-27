@@ -11,7 +11,8 @@
 실측으로 **input 블록이 일반 메시지에서도 렌더됨을 확인**했다 `[실측 ✅ T12 — plain_text_input, 라벨+입력창 렌더]`. 현행 문서도 input 블록의 surface에 Messages 포함 `[문서]`. (구 문서·구 SDK 상식 "input은 모달 전용"은 더 이상 아니다.)
 
 - 사용 가능 입력: `plain_text_input`(multiline 가능, min/max_length ≤3000), datepicker/timepicker/datetimepicker, 셀렉트류, radio, checkboxes `[문서]` `[실측 ✅ T10, T11, T12]`.
-- **Modals 전용 입력**: `email_text_input`, `url_text_input`, `number_input`, `file_input` `[문서]`.
+- `email_text_input`과 `url_text_input`은 일반 메시지 input 블록에서도 xoxb 게시·저장이 확인됐다 `[실측 ✅ T47]`.
+- **Modals 전용 입력**: `number_input`, `file_input` `[문서]`.
 - `rich_text_input`은 Messages에서 사용 불가(Modals/Home) `[문서]`.
 
 ### B. 모달 (정형 폼, 3개+ 입력)
@@ -40,7 +41,7 @@
 
 ## 검증 상태
 
-- 메시지 내 input/plain_text_input/datepicker 계열: `[실측 ✅ T10, T12]`
+- 메시지 내 input/plain_text_input/datepicker/email/url 계열: `[실측 ✅ T10, T12, T47]`
 - 모달 라이프사이클: `[문서]` (앱 필요, 미실측)
 
 ## 출처

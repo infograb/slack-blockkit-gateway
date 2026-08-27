@@ -1,0 +1,306 @@
+{
+  "text": "Slack 리치 컨트롤 종합 검증: 버튼, 콤보박스, 날짜·시간, 복수 선택, 사용자·채널 선택, 입력, 표와 차트",
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
+        "type": "plain_text",
+        "text": "리치 컨트롤 종합 예제"
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "primary_controls",
+      "elements": [
+        {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "확인"
+          },
+          "style": "primary",
+          "action_id": "rich_demo_confirm",
+          "value": "confirm"
+        },
+        {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "환경 선택"
+          },
+          "action_id": "rich_demo_environment",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "개발"
+              },
+              "value": "development"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "운영"
+              },
+              "value": "production"
+            }
+          ]
+        },
+        {
+          "type": "overflow",
+          "action_id": "rich_demo_overflow",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "상세 보기"
+              },
+              "value": "details"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "다시 실행"
+              },
+              "value": "retry"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "block_id": "schedule_controls",
+      "elements": [
+        {
+          "type": "datepicker",
+          "action_id": "rich_demo_date",
+          "initial_date": "2026-08-27",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "날짜 선택"
+          }
+        },
+        {
+          "type": "timepicker",
+          "action_id": "rich_demo_time",
+          "initial_time": "14:30",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "시간 선택"
+          }
+        },
+        {
+          "type": "datetimepicker",
+          "action_id": "rich_demo_datetime",
+          "initial_date_time": 1787808600
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "block_id": "multi_choice",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*복수 선택*"
+      },
+      "accessory": {
+        "type": "multi_static_select",
+        "action_id": "rich_demo_multi",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "복수 선택"
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "알림"
+            },
+            "value": "notify"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "승인"
+            },
+            "value": "approve"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "보고"
+            },
+            "value": "report"
+          }
+        ]
+      }
+    },
+    {
+      "type": "actions",
+      "block_id": "choice_controls",
+      "elements": [
+        {
+          "type": "radio_buttons",
+          "action_id": "rich_demo_priority",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "낮음"
+              },
+              "value": "low"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "높음"
+              },
+              "value": "high"
+            }
+          ]
+        },
+        {
+          "type": "checkboxes",
+          "action_id": "rich_demo_checks",
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "로그 포함"
+              },
+              "value": "logs"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "스레드 알림"
+              },
+              "value": "thread_notice"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "actions",
+      "block_id": "entity_controls",
+      "elements": [
+        {
+          "type": "users_select",
+          "action_id": "rich_demo_user",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "담당자 선택"
+          }
+        },
+        {
+          "type": "conversations_select",
+          "action_id": "rich_demo_conversation",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "대화 선택"
+          }
+        },
+        {
+          "type": "channels_select",
+          "action_id": "rich_demo_channel",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "채널 선택"
+          }
+        }
+      ]
+    },
+    {
+      "type": "input",
+      "block_id": "plain_input",
+      "label": {
+        "type": "plain_text",
+        "text": "메모"
+      },
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "rich_demo_note",
+        "multiline": true
+      },
+      "optional": true
+    },
+    {
+      "type": "input",
+      "block_id": "email_input",
+      "label": {
+        "type": "plain_text",
+        "text": "이메일"
+      },
+      "element": {
+        "type": "email_text_input",
+        "action_id": "rich_demo_email"
+      },
+      "optional": true
+    },
+    {
+      "type": "input",
+      "block_id": "url_input",
+      "label": {
+        "type": "plain_text",
+        "text": "URL"
+      },
+      "element": {
+        "type": "url_text_input",
+        "action_id": "rich_demo_url"
+      },
+      "optional": true
+    },
+    {
+      "type": "table",
+      "column_settings": [
+        {
+          "align": "left"
+        },
+        {
+          "align": "center"
+        }
+      ],
+      "rows": [
+        [
+          {
+            "type": "raw_text",
+            "text": "항목"
+          },
+          {
+            "type": "raw_text",
+            "text": "상태"
+          }
+        ],
+        [
+          {
+            "type": "raw_text",
+            "text": "리치 컨트롤"
+          },
+          {
+            "type": "raw_text",
+            "text": "수락"
+          }
+        ]
+      ]
+    },
+    {
+      "type": "data_visualization",
+      "title": "검증 비율",
+      "chart": {
+        "type": "pie",
+        "segments": [
+          {
+            "label": "통과",
+            "value": 7
+          },
+          {
+            "label": "추가 검증",
+            "value": 1
+          }
+        ]
+      }
+    }
+  ]
+}

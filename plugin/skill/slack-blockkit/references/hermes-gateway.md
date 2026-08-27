@@ -91,6 +91,12 @@ Hermes의 공개 플러그인 API와 내장 Slack 렌더러로 자동 적용되�
 
 이 블록들은 `slack-blockkit`의 명시적 페이로드 작성 패턴으로 유지한다. Hermes의 현재 공개 플러그인 계약에는 outbound blocks 교체 훅이 없으므로, 자동화를 위해 private `SlackAdapter._maybe_blocks()`를 monkey-patch하거나 내장 Slack platform을 덮어쓰지 않는다.
 
+2026-08-27 xoxb 실측에서는 button/static/overflow, 달력·시간 선택기, multi-select, radio/checkbox, 사용자·대화·채널 선택기, message input, table, data_visualization, plan이 모두 API 수락·저장됐다. 정확한 종합 payload는 `references/payloads/rich-controls-message.json`, 결과는 `references/verified-matrix.md` T43~T49에 있다.
+
+단, **보이는 것과 작동하는 것은 다르다.** 임의 `action_id`는 플러그인이 자동 처리하지 않는다. Hermes가 기본 제공하는 clarify/approval/feedback action 외의 컨트롤은 `block_actions`, options load, modal submission을 처리하는 별도 앱 백엔드가 있어야 한다.
+
+성능 기준과 실측치는 `references/performance.md`를 따른다. 로컬 렌더링은 Slack API 왕복보다 훨씬 작아야 하며, renderer p95가 10ms를 넘으면 회귀로 조사한다.
+
 ## 확인
 
 ```bash
@@ -111,10 +117,10 @@ Gateway 세션에서는 `/plugins`로 로드 상태를 확인한다. 새 Slack �
 
 - 저장소 루트 `hermes plugins doctor . --ci` 통과
 - `plugin.yaml`, `__init__.py`, `skill/`만 임시 디렉터리에 복사한 standalone doctor 통과
-- 번들 skill 검사 통과: Markdown 24개, JSON payload 10개, 공개 screenshot 0개
+- 번들 skill 검사 통과: JSON payload와 Markdown 문서 전수 검증
 - Hermes 내장 `render_blocks()`에 제목·목록·코드·표가 있는 Markdown을 입력해 `header`, `section`, `divider`, `rich_text`, `table` 7개 블록 생성 확인
 
-실제 xoxb Gateway 게시·클라이언트 렌더는 `[미검증]`이며 `references/gaps.md` A11로 추적한다.
+실제 xoxb 게시·저장은 T43~T49로 확인했다. 장기 실행 Gateway의 native Task Card 재시작 후 스트리밍은 `references/gaps.md` A11로 추적한다.
 
 ## 출처
 
