@@ -1,0 +1,12 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "지연 시간 순위 (data_table — 페이지네이션)",
+  "blocks": [
+    { "type": "data_table", "caption": "서비스별 지연 — 페이지로 나눠 봅니다", "page_size": 2, "rows": [
+      [ { "type": "raw_text", "text": "서비스" }, { "type": "raw_text", "text": "지연ms" } ],
+      [ { "type": "raw_text", "text": "api" }, { "type": "raw_text", "text": "12" } ],
+      [ { "type": "raw_text", "text": "worker" }, { "type": "raw_text", "text": "870" } ],
+      [ { "type": "raw_text", "text": "cron" }, { "type": "raw_text", "text": "3" } ]
+    ]}
+  ]
+}

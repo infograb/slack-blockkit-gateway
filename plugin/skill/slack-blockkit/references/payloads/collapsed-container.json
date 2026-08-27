@@ -1,0 +1,18 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "검색 결과 30건 — 상위 3건 (나머지는 접힌 컨테이너)",
+  "blocks": [
+    { "type": "section", "text": { "type": "mrkdwn", "text": ":mag: *\"배포 실패\" 검색 결과 30건* — 상위 3건" } },
+    { "type": "section", "text": { "type": "mrkdwn", "text": "1. <https://example.com/1|prod 배포 OOM으로 실패>\n2. <https://example.com/2|스테이징 마이그레이션 실패>\n3. <https://example.com/3|롤백 중 헬스체크 실패>" } },
+    { "type": "container", "title": { "type": "plain_text", "text": "나머지 27건 — 펼쳐 보기" }, "is_collapsible": true, "default_collapsed": true, "child_blocks": [
+      { "type": "rich_text", "elements": [
+        { "type": "rich_text_list", "style": "bullet", "indent": 0, "elements": [
+          { "type": "rich_text_section", "elements": [ { "type": "text", "text": "결과 4 — " }, { "type": "link", "url": "https://example.com/4", "text": "링크" } ] },
+          { "type": "rich_text_section", "elements": [ { "type": "text", "text": "결과 5 — " }, { "type": "link", "url": "https://example.com/5", "text": "링크" } ] },
+          { "type": "rich_text_section", "elements": [ { "type": "text", "text": "…(27건까지 계속)" } ] }
+        ]}
+      ]}
+    ]},
+    { "type": "context", "elements": [ { "type": "mrkdwn", "text": "container 블록은 최대 10개의 child 블록 — 항목은 rich_text_list로 묶어 넣을 것" } ] }
+  ]
+}

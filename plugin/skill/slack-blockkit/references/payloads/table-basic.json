@@ -1,0 +1,12 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "서비스 상태 표 (table 블록)",
+  "blocks": [
+    { "type": "section", "text": { "type": "mrkdwn", "text": "*서비스 상태* — 12:55 기준" } },
+    { "type": "table", "rows": [
+      [ { "type": "raw_text", "text": "서비스" }, { "type": "raw_text", "text": "상태" }, { "type": "raw_text", "text": "지연" } ],
+      [ { "type": "raw_text", "text": "api" }, { "type": "rich_text", "elements": [ { "type": "rich_text_section", "elements": [ { "type": "text", "text": "정상", "style": { "bold": true } } ] } ] }, { "type": "raw_text", "text": "12ms" } ],
+      [ { "type": "raw_text", "text": "worker" }, { "type": "raw_text", "text": "지연" }, { "type": "raw_text", "text": "870ms" } ]
+    ]}
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slack Block Kit"
+  short_description: "검증된 리치 Slack 채널 메시지 작성과 검증"
+  default_prompt: "Use $slack-blockkit to create and validate a rich Slack channel message for this content."

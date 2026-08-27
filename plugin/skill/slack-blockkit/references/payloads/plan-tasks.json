@@ -1,0 +1,15 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "배포 계획 (plan 블록) + 개별 작업 카드 (task_card)",
+  "blocks": [
+    { "type": "plan", "title": "배포 계획 — api-server v2.3.1", "tasks": [
+      { "task_id": "1", "title": "빌드", "status": "complete" },
+      { "task_id": "2", "title": "테스트", "status": "in_progress" },
+      { "task_id": "3", "title": "배포", "status": "pending" }
+    ]},
+    { "type": "task_card", "task_id": "2", "title": "테스트 — 단위/통합 312건", "status": "in_progress",
+      "details": { "type": "rich_text", "elements": [ { "type": "rich_text_section", "elements": [ { "type": "text", "text": "통합 테스트 41/52 진행 중" } ] } ] },
+      "sources": [ { "type": "url", "url": "https://example.com/ci/123", "text": "CI 로그" } ]
+    }
+  ]
+}

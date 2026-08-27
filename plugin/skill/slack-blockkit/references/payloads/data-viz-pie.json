@@ -1,0 +1,11 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "배포 결과 비율 (data_visualization 파이)",
+  "blocks": [
+    { "type": "data_visualization", "title": "이번 주 배포 결과", "chart": { "type": "pie", "segments": [
+      { "label": "성공", "value": 42 },
+      { "label": "실패", "value": 8 },
+      { "label": "대기", "value": 5 }
+    ]}}
+  ]
+}

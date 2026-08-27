@@ -1,0 +1,23 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "배포 승인 요청 — api-server v2.3.1 → prod (승인/거절 버튼)",
+  "blocks": [
+    { "type": "section", "text": { "type": "mrkdwn", "text": "*배포 승인 요청* — `api-server` v2.3.1 → *prod*" } },
+    { "type": "section", "fields": [
+      { "type": "mrkdwn", "text": "*커밋*\n14개" },
+      { "type": "mrkdwn", "text": "*테스트*\n:white_check_mark: 312/312" },
+      { "type": "mrkdwn", "text": "*변경 파일*\n9개" },
+      { "type": "mrkdwn", "text": "*롤백*\n가능 (v2.3.0)" }
+    ]},
+    { "type": "divider" },
+    { "type": "actions", "block_id": "approval_run123", "elements": [
+      { "type": "button", "text": { "type": "plain_text", "text": "승인" }, "style": "primary", "action_id": "approve", "value": "run-123" },
+      { "type": "button", "text": { "type": "plain_text", "text": "거절" }, "style": "danger", "action_id": "reject", "value": "run-123",
+        "confirm": { "title": { "type": "plain_text", "text": "정말 거절할까요?" }, "text": { "type": "mrkdwn", "text": "배포가 취소되고 요청자에게 알립니다." }, "confirm": { "type": "plain_text", "text": "거절" }, "deny": { "type": "plain_text", "text": "취소" }, "style": "danger" } },
+      { "type": "button", "text": { "type": "plain_text", "text": "diff 보기 :arrow_upper_right:" }, "url": "https://example.com/diff", "action_id": "open_diff" }
+    ]},
+    { "type": "context", "elements": [
+      { "type": "mrkdwn", "text": "요청: deploy-agent • run-123 • 이 스레드에 텍스트 답글로도 의견을 남길 수 있습니다" }
+    ]}
+  ]
+}

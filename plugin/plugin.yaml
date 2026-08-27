@@ -1,0 +1,13 @@
+name: slack-blockkit-gateway
+version: 1.0.0
+manifest_version: 1
+api_version: 1
+description: Render Hermes Slack gateway replies as rich Block Kit without giving the plugin Slack credentials.
+author: InfoGrab
+license: MIT
+homepage: https://github.com/infograb/slack-blockkit-gateway
+tags:
+  - slack
+  - block-kit
+  - gateway
+  - skills

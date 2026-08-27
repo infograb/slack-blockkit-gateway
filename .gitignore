@@ -1,0 +1,10 @@
+.DS_Store
+.env
+.venv/
+.hermes/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+dist/
+verification/screenshots/
+plugin/skill/slack-blockkit/references/screenshots/

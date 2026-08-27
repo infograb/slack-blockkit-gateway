@@ -1,0 +1,19 @@
+{
+  "channel": "<CHANNEL_ID>",
+  "text": "배포 환경을 선택하세요 (셀렉트 + 더보기 메뉴)",
+  "blocks": [
+    { "type": "section", "text": { "type": "mrkdwn", "text": "*배포 환경을 선택하세요* — 선택 즉시 배포가 시작됩니다" } },
+    { "type": "actions", "block_id": "env_choice", "elements": [
+      { "type": "static_select", "placeholder": { "type": "plain_text", "text": "환경 선택" }, "action_id": "env", "options": [
+        { "text": { "type": "plain_text", "text": "dev" }, "value": "dev" },
+        { "text": { "type": "plain_text", "text": "staging" }, "value": "stg" },
+        { "text": { "type": "plain_text", "text": "prod" }, "value": "prod" }
+      ]},
+      { "type": "overflow", "action_id": "more", "options": [
+        { "text": { "type": "plain_text", "text": "로그 보기" }, "value": "logs" },
+        { "text": { "type": "plain_text", "text": "재시도" }, "value": "retry" },
+        { "text": { "type": "plain_text", "text": "담당자 호출" }, "value": "page" }
+      ]}
+    ]}
+  ]
+}

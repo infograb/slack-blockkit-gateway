@@ -1,0 +1,122 @@
+name: Plugin Release
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+env:
+  HERMES_REF: "9aa7530f7b53699e2c6d648ded8f6300503b3dc7"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Hermes
+        run: |
+          git clone --filter=blob:none --no-checkout \
+            https://github.com/NousResearch/hermes-agent.git \
+            /tmp/hermes-agent
+          git -C /tmp/hermes-agent checkout "${HERMES_REF}"
+          python -m pip install -e /tmp/hermes-agent
+
+      - name: Run contract and release tests
+        run: python -m unittest discover -s tests -p "test_*.py"
+
+      - name: Run Hermes Plugin Doctor
+        run: hermes plugins doctor plugin --ci
+
+      - name: Run Hermes install security scan
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from tools.plugin_guard import format_scan_report, scan_plugin
+
+          result = scan_plugin(Path("plugin"), source="ci")
+          print(format_scan_report(result))
+          if result.verdict != "safe":
+              raise SystemExit(f"install scanner verdict: {result.verdict}")
+          PY
+
+      - name: Validate bundled skill
+        run: python plugin/skill/slack-blockkit/scripts/check_package.py
+
+      - name: Build reproducible release archives
+        run: python scripts/build-plugin-release.py --output dist
+
+      - name: Match tag to manifest version
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          version=$(python -c 'import yaml; print(yaml.safe_load(open("plugin/plugin.yaml"))["version"])')
+          test "${GITHUB_REF_NAME}" = "v${version}"
+
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: slack-blockkit-gateway-release
+          path: |
+            dist/slack-blockkit-gateway-*.zip
+            dist/slack-blockkit-gateway-*.tar.gz
+            dist/SHA256SUMS
+          if-no-files-found: error
+
+  attest:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: slack-blockkit-gateway-release
+          path: dist
+
+      - name: Attest release artifacts
+        uses: actions/attest-build-provenance@96b4a1ef7235a096b17240c259729fdd70c83d45 # v2
+        with:
+          subject-path: |
+            dist/slack-blockkit-gateway-*.zip
+            dist/slack-blockkit-gateway-*.tar.gz
+            dist/SHA256SUMS
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [verify, attest]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: slack-blockkit-gateway-release
+          path: dist
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${GITHUB_REF_NAME}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" dist/* \
+              --repo "${GITHUB_REPOSITORY}" \
+              --verify-tag \
+              --generate-notes
+          fi
