@@ -11,6 +11,8 @@
 | table 최대형 100×20 생성 | 200 | 2.0122 ms | 2.0418 ms | 2.0487 ms | 217.6 KiB |
 | 50-block sanitize | 2,000 | 0.0163 ms | 0.0176 ms | 0.0208 ms | 61.2 KiB |
 
+Slack API read latency(`conversations.replies`, 10회): 평균 387.0ms, p50 363.1ms, p95/max 455.8ms. 이는 Block Kit 로컬 렌더링 p95보다 약 두 자릿수 이상 크므로, 사용자 체감 지연은 렌더러보다 네트워크/API가 지배한다.
+
 ## 판정
 
 - renderer/sanitizer는 p95 2.1ms 이하로, Slack API 네트워크 왕복에 비해 무시 가능한 수준이다.
